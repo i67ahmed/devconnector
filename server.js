@@ -12,9 +12,9 @@ const posts = require('./routes/apis/posts');
 app.use(express.urlencoded());
 app.use(express.json());
 
-//Passport config
-// app.use(passport.initialize());
-// require('./config/passport')(passport);
+Passport config
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 //Let's write our first route
 app.get('/', (req,res) => res.send("Hello World!"));
