@@ -12,7 +12,7 @@ const posts = require('./routes/apis/posts');
 app.use(express.urlencoded());
 app.use(express.json());
 
-Passport config
+//Passport config
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
