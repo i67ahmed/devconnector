@@ -34,6 +34,11 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+   
+    if (nextProps.auth.isAuthenticated){
+      this.props.history.push('/dashboard');
+    }
+
     if(nextProps.errors){
       this.setState({errors: nextProps.errors});
     }
@@ -77,10 +82,12 @@ class Login extends Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   errors: state.errors
 })
 

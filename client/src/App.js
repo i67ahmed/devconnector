@@ -10,6 +10,24 @@ import Login from './components/auth/Login';
 import store from './store';
 
 
+
+if (localStorage.jwtToken){
+  //Set token to auth header
+  setAuthToken(localStorage.jwtToken);
+
+  //Decode token
+  const decoded = jwt_decode(localStorage.jwtToken);
+  store.dispatch({
+    type: SET_CURRENT_USER,
+    payload: decoded
+  });
+
+  
+}
+
+
+
+
 class App extends Component {
 
   render (){
