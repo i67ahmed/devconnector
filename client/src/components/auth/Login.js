@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import {loginUser} from '../../actions/authActions';
 
@@ -31,6 +30,12 @@ class Login extends Component {
 
     this.props.loginUser(newUser);
 
+  }
+
+  componentDidMount(){
+    if(this.props.auth.isAuthenticated){
+      this.props.history.push('/dashboard');
+    }
   }
 
   componentWillReceiveProps(nextProps){
@@ -92,4 +97,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, {loginUser})(withRouter(Login));
+export default connect(mapStateToProps, {loginUser})(Login);

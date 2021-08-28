@@ -1,26 +1,24 @@
 import { SET_ERRORS, SET_USER } from './types';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import setAuthToken from '../utilis/setAuthHeader';
+import setAuthToken from '../utils/setAuthToken';
 
 //Register user
 
-export const registerUser = (userData,history) => dispatch => {
+export const registerUser = (userData, history) => dispatch => {
   axios
-  .post('/api/users/register', userData)
-  .then(res => history.push('/login'))
-  .catch(err => 
-    dispatch({
-      type: SET_ERRORS,
-      payload: err.response.data
-    })); 
+    .post('/api/users/register', userData)
+    .then(_res => history.push('/login'))
+    .catch(err => 
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      }));
 }
-
-//Login user
 
 export const loginUser = userData => dispatch => {
   axios
-    .post('/api/users/login', userData)
+    .post("/api/users/login", userData)
     .then((res) => {
       //save the token to localstorage
       const {token} = res.data;
@@ -35,14 +33,13 @@ export const loginUser = userData => dispatch => {
         payload: decoded,
       });
     })
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data
-      }));
+        payload: err.response.data,
+      })
+    );
 }
-
-//logout user
 
 export const logoutUser = () => dispatch => {
   //Remove token from ls
